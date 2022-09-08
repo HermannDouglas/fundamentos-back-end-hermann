@@ -3,7 +3,7 @@ package br.ufac.sgcm.model;
 import java.io.Serializable;
 
 public class Profissional implements Serializable {
-
+// ssdfsdf
     private Long id;
     private String nome;
     private String registroConselho;
