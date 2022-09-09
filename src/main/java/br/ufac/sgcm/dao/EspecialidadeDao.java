@@ -60,19 +60,19 @@ public class EspecialidadeDao implements IDao<Especialidade> {
     }
 
     @Override
-    public int insert() {
+    public int insert(Especialidade objeto) {
         // TODO Auto-generated method stub
         return 0;
     }
 
     @Override
-    public int update() {
+    public int update(Especialidade objeto) {
         // TODO Auto-generated method stub
         return 0;
     }
 
     @Override
-    public int delete() {
+    public int delete(Long id) {
         // TODO Auto-generated method stub
         return 0;
     }

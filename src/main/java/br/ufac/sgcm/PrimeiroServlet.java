@@ -4,8 +4,10 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
+import br.ufac.sgcm.controller.ProfissionalController;
 import br.ufac.sgcm.dao.EspecialidadeDao;
 import br.ufac.sgcm.model.Especialidade;
+import br.ufac.sgcm.model.Profissional;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
@@ -29,6 +31,14 @@ public class PrimeiroServlet extends HttpServlet {
         List<Especialidade> lista = dao.get();
         for (Especialidade e: lista) {
             saida.println(e.getNome());
+        }
+
+        ProfissionalController controle = new ProfissionalController();
+        List<Profissional> listaPro = controle.get();
+        for (Profissional p: listaPro) {
+            saida.println("Especialidade: " +p.getEspecialidade().getNome());
+            saida.println("Unidade: " + p.getUnidade().getNome());
+            saida.print("");
         }
 
     }
