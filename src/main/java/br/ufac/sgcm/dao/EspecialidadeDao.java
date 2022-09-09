@@ -42,8 +42,22 @@ public class EspecialidadeDao implements IDao<Especialidade> {
 
     @Override
     public Especialidade get(Long id) {
-        // TODO Auto-generated method stub
-        return null;
+        Especialidade registro = new Especialidade();
+        String sql = "SELECT * FROM especialidade WHERE = ?";
+        try {
+            ps = conexao.prepareStatement(sql);
+            ps.setLong(1, id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                registro.setId(rs.getLong("id"));
+                registro.setNome(rs.getString("nome"));
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return registro;
+        
     }
 
     @Override
