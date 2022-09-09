@@ -7,30 +7,31 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.ufac.sgcm.model.Especialidade;
+import br.ufac.sgcm.model.Unidade;
 
-public class EspecialidadeDao implements IDao<Especialidade> {
+public class UnidadeDao implements IDao<Unidade> {
 
     private Connection conexao;
     private PreparedStatement ps;
     private ResultSet rs;
 
-    public EspecialidadeDao() {
+    public UnidadeDao() {
         conexao = ConexaoDB.getConexao();
     }
 
     @Override
-    public List<Especialidade> get() {
+    public List<Unidade> get() {
         
-        List<Especialidade> registros = new ArrayList<>();
-        String sql = "SELECT * FROM especialidade";
+        List<Unidade> registros = new ArrayList<>();
+        String sql = "SELECT * FROM unidade";
         try {
             ps = conexao.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
-                Especialidade registro = new Especialidade();
+                Unidade registro = new Unidade();
                 registro.setId(rs.getLong("id"));
                 registro.setNome(rs.getString("nome"));
+                registro.setEndereco(rs.getString("endereco"));                
                 registros.add(registro);
             }
         } catch (SQLException e) {
@@ -38,12 +39,14 @@ public class EspecialidadeDao implements IDao<Especialidade> {
             e.printStackTrace();
         }
         return registros;
+
     }
 
     @Override
-    public Especialidade get(Long id) {
-        Especialidade registro = new Especialidade();
-        String sql = "SELECT * FROM especialidade WHERE id = ?";
+    public Unidade get(Long id) {
+        
+        Unidade registro = new Unidade();
+        String sql = "SELECT * FROM unidade WHERE id = ?";
         try {
             ps = conexao.prepareStatement(sql);
             ps.setLong(1, id);
@@ -51,12 +54,14 @@ public class EspecialidadeDao implements IDao<Especialidade> {
             if (rs.next()) {
                 registro.setId(rs.getLong("id"));
                 registro.setNome(rs.getString("nome"));
+                registro.setEndereco(rs.getString("endereco"));
             }
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return registro;
+
     }
 
     @Override
