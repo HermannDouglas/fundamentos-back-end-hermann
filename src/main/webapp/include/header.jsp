@@ -1,4 +1,4 @@
-<%@ page pageEncoding="UTF-8" %>
+
     <header>
         <div id="logo">
             <img src="imagens/logo.png" alt="Logo SGCM">
