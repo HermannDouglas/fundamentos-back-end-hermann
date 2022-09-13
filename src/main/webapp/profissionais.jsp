@@ -3,13 +3,13 @@
 <%@ page import="java.util.List" %>
 <%@ page import="br.ufac.sgcm.model.Profissional" %>
 
-
 <jsp:useBean
     id="controller"
     class="br.ufac.sgcm.controller.ProfissionalController"
-    scope="page"/>
+    scope="page" />
 
 <%
+
     String paramExcluir = request.getParameter("excluir");
     if (paramExcluir != null) {
         Long id = Long.parseLong(paramExcluir);
@@ -28,7 +28,9 @@
         <%@ include file="include/nav.jsp" %>
         <main>
             <jsp:include page="include/comandos.jsp">
-                <jsp:param name="link" value="profissionaisForm.jsp"/>
+                <jsp:param 
+                name="link" 
+                value="profissionaisForm.jsp" />
             </jsp:include>
             <table>
                 <thead>
@@ -48,14 +50,18 @@
                     <tr>
                         <td class="fit"><%=item.getId()%></td>
                         <td><%=item.getNome()%></td>
-                        <td><%=item.getConselho()%></td>
+                        <td><%=item.getRegistroConselho()%></td>
                         <td><%=item.getEspecialidade().getNome()%></td>
                         <td><%=item.getUnidade().getNome()%></td>
                         <td><%=item.getTelefone()%></td>
                         <td><%=item.getEmail()%></td>
                         <td>
-                            <a href="profissionais.jsp?id=<%=item.getId()%>" class="botao">Editar</a>
-                            <a href="profissionais.jsp?excluir=<%=item.getId()%>" class="botao excluir">Excluir</a>
+                            <a 
+                            href="profissionaisForm.jsp?id=<%=item.getId()%>" 
+                            class="botao">Editar</a>
+                            <a 
+                            href="profissionais.jsp?excluir=<%=item.getId()%>" 
+                            class="botao excluir">Excluir</a>
                         </td>
                     </tr>
                     <% } %>

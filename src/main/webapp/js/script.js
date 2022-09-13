@@ -2,83 +2,11 @@ window.onload = function() {
 
    let botaoUrl = document.querySelector("input[data-url]");
    if (botaoUrl) {
-    botaoUrl.addEventListener("click", () =>
-        {
+    botaoUrl.addEventListener('click', () => {
             let url = botaoUrl.getAttribute("data-url");
             window.location.href = url;
         })
    }
-
-    // Adiciona uma ação para realizar uma requisição de um arquivo JSON
-    // e inserir o conteúdo na tabela.
-    // Inicialmente a requisição foi feita por meio do objeto XMLHttpRequest,
-    // e depois utilizando Fetch API.
-    // let xhr = new XMLHttpRequest();
-    let botaoCarregar = document.querySelector("a#load");
-    if (botaoCarregar) {
-        botaoCarregar.addEventListener("click", () => {
-            let tabela = document.querySelector("table");
-            let url = "http://my-json-server.typicode.com/danielnsilva/json/profissionais";
-            // xhr.open("GET", url);
-            // xhr.addEventListener("readystatechange", () => {
-                // if (xhr.readyState == 4 && xhr.status == 200) {
-                    // let dados = JSON.parse(xhr.responseText);
-            fetch(url)
-            .then(resposta => resposta.json())
-            .then(dados => {
-                    for (let item in dados) {
-                        let linha = document.createElement("tr");
-                        let id = document.createElement("td");
-                        let nome = document.createElement("td");
-                        let registro = document.createElement("td");
-                        let especialidade = document.createElement("td");
-                        let unidade = document.createElement("td");
-                        let telefone = document.createElement("td");
-                        let email = document.createElement("td");
-                        let acoes = document.createElement("td");
-                        id.classList.add("fit");
-                        id.textContent = dados[item].id;
-                        nome.textContent = dados[item].nome;
-                        registro.textContent = dados[item].registro;
-                        especialidade.textContent = dados[item].especialidade;
-                        unidade.textContent = dados[item].unidade;
-                        telefone.textContent = dados[item].telefone;
-                        email.textContent = dados[item].email;
-                        acoes.innerHTML = `
-                        <a href="javascript:void(0)" class="botao">Editar</a>\n
-                        <a href="javascript:void(0)" class="botao excluir">Excluir</a>
-                        `;
-                        linha.appendChild(id);
-                        linha.appendChild(nome);
-                        linha.appendChild(registro);
-                        linha.appendChild(especialidade);
-                        linha.appendChild(unidade);
-                        linha.appendChild(telefone);
-                        linha.appendChild(email);
-                        linha.appendChild(acoes);
-                        tabela.tBodies[0].appendChild(linha);
-                    }
-            });
-                //  }
-            // });
-            // xhr.send();
-        });
-    }
-
-    // Adicina uma ação par ao botão 'Adicionar' que exibe o formulário,
-    // e esconde a barra de comandos e tabela.
-    let botao = document.querySelector("a.botao#add");
-    botao.addEventListener("click", () => {
-        let form = document.querySelector("form");
-        let divComandos = document.querySelector("div#comandos");
-        let tabela = document.querySelector("table");
-        form.classList.remove("inativo");
-        divComandos.classList.add("inativo");
-        tabela.classList.add("inativo");
-    });
-
-    
-
 
     // Permite ao usuário alterar o tema da página ao escolher
     // uma opção na caixa de selação. O evento 'change' ocorre
