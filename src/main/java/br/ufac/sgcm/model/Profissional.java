@@ -48,12 +48,21 @@ public class Profissional implements Serializable {
     public void setEspecialidade(Especialidade especialidade) {
         this.especialidade = especialidade;
     }
+    
+    public void setEspecialidade(String especialidadeId) {
+        Especialidade especialidade = new Especialidade();
+        Long id = Long.parseLong(especialidadeId);
+        especialidade.setId(id);
+        this.especialidade = especialidade;
+    }
     public Unidade getUnidade() {
         return unidade;
     }
     public void setUnidade(Unidade unidade) {
-        this.unidade = unidade;
-    }
+        Unidade unidade = new Unidade();
+        Long id = Long.parseLong(especialidadeId);
+        especialidade.setId(id);
+        this.especialidade = especialidade;    }
 
     
     

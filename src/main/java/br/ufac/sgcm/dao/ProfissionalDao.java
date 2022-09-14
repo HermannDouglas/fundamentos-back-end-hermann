@@ -76,9 +76,20 @@ public class ProfissionalDao implements IDao<Profissional> {
     }
 
     @Override
-    public int insert(Profissional objeto) {
-        // TODO Auto-generated method stub
-        return 0;
+    public int insert(Profissional objeto) throws SQLException {
+        int registrosAfetados = 0;
+        String sql = "INSERT INTO profissional" + 
+                    "(nome, registro_conselho, telefone, email, especialidade_id, unidade_id)" +
+                    "VALUES (?, ?, ?, ?, ?, ?)";
+        ps = conexao.prepareStatement(sql);
+        ps.setString(1, objeto.getNome());
+        ps.setString(2, objeto.getRegistroConselho());
+        ps.setString(3, objeto.getTelefone());
+        ps.setString(4, objeto.getEmail());
+        ps.setLong(5, objeto.getEspecialidade().getId());
+        ps.setLong(6, objeto.getUnidade().getId());
+        registrosAfetados = ps.executeUpdate();
+        return registrosAfetados;
     }
 
     @Override
@@ -88,18 +99,13 @@ public class ProfissionalDao implements IDao<Profissional> {
     }
 
     @Override
-    public int delete(Long id) {
+    public int delete(Long id) throws SQLException {
         int registrosAfetados = 0;
         String sql = "DELETE FROM profissional WHERE id = ?";
-        try {
             ps = conexao.prepareStatement(sql);
             ps.setLong(1, id);
             registrosAfetados = ps.executeUpdate();
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        return 0;
+            return registrosAfetados;
     }
     
 }

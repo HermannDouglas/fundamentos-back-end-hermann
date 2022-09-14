@@ -1,4 +1,33 @@
 <%@ page pageEncoding="UTF-8" %>
+
+<%@ page import="br.ufac.sgcm.model.Especialidade" %>
+<%@ page import="br.ufac.sgcm.model.Unidade" %>
+
+<jsp:useBean id="controller" class="br.ufac.sgcm.controller.ProfissionalController" scope="page" />
+<jsp:useBean id="controllerE" class="br.ufac.sgcm.controller.EspecialidadeController" scope="page" />
+<jsp:useBean id="controllerU" class="br.ufac.sgcm.controller.UnidadeController" scope="page" />
+
+<jsp:useBean id="item" class="br.ufac.sgcm.model.Profissional" scope="page" />
+
+<%
+
+    String paramId = request.getParameter("id");
+    if(param != null){
+        Long id = Long.parseLong(paramId);
+        item = controller.get(id);
+    } 
+    String submit = request.getParameter("submit");
+    if(submit != null){
+        item.setNome(request.getParameter("nome"));
+        item.setRegistroConselho(request.getParameter("registroConselho"));
+        item.setTelefone(request.getParameter("telefone"));
+        item.setEmail(request.getParameter("email"));
+        item.setEspecialida(request.getParameter("email"));
+        item.setEmail(request.getParameter("email"));
+    }
+
+%>
+
 <!DOCTYPE html>
 <html>
     <%@ include file="include/head.jsp" %>
@@ -9,31 +38,48 @@
             <form action="#">
                 <div class="grid">
                     <label for="nome">Nome</label>
-                    <input type="text" name="nome" id="nome" required>
+                    <input type="text" name="nome" id="nome" 
+                            value="<%=item.getNome() != null ? item.getNome() : "" %>" required>
                     <label for="registroConselho">Registro</label>
-                    <input type="text" name="registroConselho" id="registroConselho">
+                    <input type="text" name="registroConselho" id="registroConselho"
+                            value="<%=item.getRegistroConselho() != null ? item.getRegistroConselho() : "" %>">
                     <label for="especialidade">Especialidade</label>
                     <select name="especialidade" id="especialidade" required>
                         <option value=""></option>
-                        <option value="1">Especialidade A</option>
-                        <option value="2">Especialidade B</option>
-                        <option value="3">Especialidade C</option>
-                        <option value="4">Especialidade D</option>
-                        <option value="5">Especialidade E</option>
+                        <%
+                            String selecionado = "";
+                            for(Especialidade e: controllerE.get()){
+                                selecionado = "";
+                                if(item.getId() != null) {
+                                    if(e.getId() == item.getEspecialidade().getId()) {
+                                        selecionado = " selected";
+                                    }
+                                }
+                        %>
+                        <option value="<%=e.getId()%>"<%=selecionado%>><%=e.getNome()%></option>
+                        <% } %>
                     </select>
                     <label for="unidade">Unidade</label>
                     <select name="unidade" id="unidade">
                         <option value=""></option>
-                        <option value="1">Unidade A</option>
-                        <option value="2">Unidade B</option>
-                        <option value="3">Unidade C</option>
-                        <option value="4">Unidade D</option>
-                        <option value="5">Unidade E</option>
+                        <%
+                            for(Unidade u: controllerU.get()){
+                                selecionado = "";
+                                if(item.getId() != null) {
+                                    if(u.getId() == item.getEspecialidade().getId()) {
+                                        selecionado = " selected";
+                                    }
+                                }
+                        %>
+                        <option value="<%=u.getId()%>"<%=selecionado%>><%=u.getNome()%></option>
+                        <% } %>
                     </select>
                     <label for="telefone">Telefone</label>
-                    <input type="text" name="telefone" id="telefone">
+                    <input type="text" name="telefone" id="telefone"
+                        value="<%=item.getTelefone() != null ? item.getTelefone() : "" %>">
                     <label for="email">E-mail</label>
-                    <input type="text" name="email" id="email">
+                    <input type="text" name="email" id="email"
+                        value="<%=item.getEmail() != null ? item.getEmail() : "" %>">
                 </div>
                 <input type="button" value="Cancelar" data-url="profissionais.jsp">
                 <input type="submit" value="Salvar">
