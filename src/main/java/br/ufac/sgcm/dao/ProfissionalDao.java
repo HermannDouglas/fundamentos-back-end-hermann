@@ -53,6 +53,7 @@ public class ProfissionalDao implements IDao<Profissional> {
 
     @Override
     public Profissional get(Long id) {
+        
         Profissional registro = new Profissional();
         String sql = "SELECT * FROM profissional WHERE id = ?";
         try {
@@ -102,10 +103,10 @@ public class ProfissionalDao implements IDao<Profissional> {
     public int delete(Long id) throws SQLException {
         int registrosAfetados = 0;
         String sql = "DELETE FROM profissional WHERE id = ?";
-            ps = conexao.prepareStatement(sql);
-            ps.setLong(1, id);
-            registrosAfetados = ps.executeUpdate();
-            return registrosAfetados;
+        ps = conexao.prepareStatement(sql);
+        ps.setLong(1, id);
+        registrosAfetados = ps.executeUpdate();
+        return registrosAfetados;
     }
     
 }

@@ -15,7 +15,7 @@
             <pre>
             <%
                 StringWriter sw = new StringWriter();
-                PrintWriter pw = new PrintWriter(sw);    
+                PrintWriter pw = new PrintWriter(sw);
                 exception.printStackTrace(pw);
                 out.println(sw.toString().replace("<", "&lt;").replace(">", "&gt;"));
             %>

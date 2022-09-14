@@ -3,7 +3,7 @@ package br.ufac.sgcm.model;
 import java.io.Serializable;
 
 public class Profissional implements Serializable {
-// ssdfsdf
+
     private Long id;
     private String nome;
     private String registroConselho;
@@ -48,7 +48,6 @@ public class Profissional implements Serializable {
     public void setEspecialidade(Especialidade especialidade) {
         this.especialidade = especialidade;
     }
-    
     public void setEspecialidade(String especialidadeId) {
         Especialidade especialidade = new Especialidade();
         Long id = Long.parseLong(especialidadeId);
@@ -59,11 +58,13 @@ public class Profissional implements Serializable {
         return unidade;
     }
     public void setUnidade(Unidade unidade) {
+        this.unidade = unidade;
+    }
+    public void setUnidade(String unidadeId) {
         Unidade unidade = new Unidade();
-        Long id = Long.parseLong(especialidadeId);
-        especialidade.setId(id);
-        this.especialidade = especialidade;    }
-
-    
+        Long id = Long.parseLong(unidadeId);
+        unidade.setId(id);
+        this.unidade = unidade;
+    }    
     
 }
