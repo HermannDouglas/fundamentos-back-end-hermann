@@ -18,6 +18,11 @@ public class Profissional implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
+    public void setId(String id) {
+        if (!id.isEmpty()) {
+            this.id = Long.parseLong(id);
+        }
+    }
     public String getNome() {
         return nome;
     }

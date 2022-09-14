@@ -11,14 +11,14 @@
 <%
 
     String paramId = request.getParameter("id");
-    if (paramId != null) {
+    if (paramId != null && !paramId.isEmpty()) {
         Long id = Long.parseLong(paramId);
         item = controller.get(id);
     }
 
     String submit = request.getParameter("submit");
     if (submit != null) {
-        out.print("<div>teste</div>");
+        item.setId(request.getParameter("id"));
         item.setNome(request.getParameter("nome"));
         item.setRegistroConselho(request.getParameter("registroConselho"));
         item.setTelefone(request.getParameter("telefone"));
@@ -41,7 +41,7 @@
             <%=request.getParameter("submit")%>
             <form method="post">
                 <div class="grid">
-                
+                    <input type="hidden" name="id" value="<%=item.getId() != null ? item.getId() : "" %>">
                     <label for="nome">Nome</label>
                     <input type="text" name="nome" id="nome"
                         value="<%=item.getNome() != null ? item.getNome() : ""%>" required>

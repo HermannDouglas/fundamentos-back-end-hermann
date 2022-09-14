@@ -94,9 +94,26 @@ public class ProfissionalDao implements IDao<Profissional> {
     }
 
     @Override
-    public int update(Profissional objeto) {
-        // TODO Auto-generated method stub
-        return 0;
+    public int update(Profissional objeto) throws SQLException {
+        int registrosAfetados = 0;
+        String sql = "UPDATE profissional SET "+ 
+                    " nome = ?," +
+                    " registro_conselho = ?,"+
+                    " telefone = ?,"+
+                    " email = ?,"+
+                    " especialidade_id = ?,"+
+                    " unidade_id = ?"+
+                    " WHERE id = ?";
+        ps = conexao.prepareStatement(sql);
+        ps.setString(1, objeto.getNome());
+        ps.setString(2, objeto.getRegistroConselho());
+        ps.setString(3, objeto.getTelefone());
+        ps.setString(4, objeto.getEmail());
+        ps.setLong(5, objeto.getEspecialidade().getId());
+        ps.setLong(6, objeto.getUnidade().getId());
+        ps.setLong(7, objeto.getId());
+        registrosAfetados = ps.executeUpdate();
+        return registrosAfetados;
     }
 
     @Override
